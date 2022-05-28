@@ -111,3 +111,5 @@ build/
 
 # Env vars - don't commit this!
 .env
+
+database.toml

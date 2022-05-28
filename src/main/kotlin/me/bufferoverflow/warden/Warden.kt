@@ -6,6 +6,7 @@ import dev.kord.common.entity.PresenceStatus
 import dev.kord.common.entity.Snowflake
 import dev.kord.gateway.Intent
 import dev.kord.gateway.PrivilegedIntent
+import me.bufferoverflow.warden.database.DatabaseManager
 
 val TEST_SERVER_ID = Snowflake(
     env("TEST_SERVER").toLong()  // Get the test server ID from the env vars or a .env file
@@ -31,6 +32,12 @@ suspend fun main() {
             +Intent.GuildMembers
             +Intent.GuildMembers
             +Intent.Guilds
+        }
+
+        hooks {
+            afterKoinSetup {
+                DatabaseManager.initTables()
+            }
         }
     }
 
