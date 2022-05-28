@@ -6,9 +6,7 @@ plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
 
-    id("com.github.jakemarsden.git-hooks")
     id("com.github.johnrengelman.shadow")
-    id("io.gitlab.arturbosch.detekt")
 }
 
 group = "template"
@@ -30,8 +28,6 @@ repositories {
 }
 
 dependencies {
-    detektPlugins(libs.detekt)
-
     implementation(libs.kord.extensions)
     implementation(libs.kotlin.stdlib)
     implementation(libs.kx.ser)
@@ -45,13 +41,7 @@ dependencies {
 
 application {
     // This is deprecated, but the Shadow plugin requires it
-    mainClassName = "template.AppKt"
-}
-
-gitHooks {
-    setHooks(
-        mapOf("pre-commit" to "detekt")
-    )
+    mainClassName = "me.bufferoverflow.warden.WardenKt"
 }
 
 tasks.withType<KotlinCompile> {
@@ -64,7 +54,7 @@ tasks.withType<KotlinCompile> {
 tasks.jar {
     manifest {
         attributes(
-            "Main-Class" to "template.AppKt"
+            "Main-Class" to "me.bufferoverflow.warden.WardenKt"
         )
     }
 }
@@ -73,9 +63,4 @@ java {
     // Current LTS version of Java
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
-}
-
-detekt {
-    buildUponDefaultConfig = true
-    config = rootProject.files("detekt.yml")
 }

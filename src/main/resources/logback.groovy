@@ -6,7 +6,7 @@ def defaultLevel = INFO
 def defaultTarget = ConsoleTarget.SystemErr
 
 if (environment == "dev") {
-    defaultLevel = DEBUG
+    defaultLevel = INFO
     defaultTarget = ConsoleTarget.SystemOut
 
     // Silence warning about missing native PRNG
